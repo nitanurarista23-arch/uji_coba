@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17151c">
+<title>My AU Phone</title>
+<style>
+:root{--bg:#17151c;--panel:#24212b;--pink:#f2b8cf;--pink2:#ffdce9;--text:#fff7fb;--muted:#bdb3c2;--line:#ffffff1a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 10%,#53354e 0,transparent 35%),radial-gradient(circle at 80% 90%,#2d4154 0,transparent 35%),#100f14;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;justify-content:center;align-items:center;padding:24px}
+.phone{width:min(390px,100%);height:min(820px,calc(100vh - 32px));min-height:620px;background:#08080b;border:3px solid #6c6673;border-radius:48px;padding:10px;box-shadow:0 30px 90px #0009;position:relative;overflow:hidden}
+.screen{height:100%;width:100%;border-radius:37px;overflow:hidden;position:relative;background:linear-gradient(150deg,#514050,#242a3a 55%,#17151c)}
+.status{height:35px;padding:9px 22px 0;display:flex;justify-content:space-between;font-size:12px;font-weight:700;position:absolute;top:0;width:100%;z-index:5;text-shadow:0 1px 5px #0008}
+.dynamic{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:92px;height:25px;border-radius:20px;background:#050507;z-index:6}
+.lock,.home,.appview{position:absolute;inset:0;display:none}.lock.active,.home.active,.appview.active{display:block}
+.lock{background:linear-gradient(180deg,#473747aa,#191c2acc),radial-gradient(ellipse at 50% 30%,#d89eb9,#4c455c 45%,#151721);text-align:center;padding:100px 22px 24px}
+.lock .date{font-size:15px;color:#fbe7f0}.clock{font-size:76px;line-height:1.05;letter-spacing:-4px;font-weight:300;margin:8px 0 24px}.lock .subtitle{font-size:13px;color:#f8dce8;margin-top:5px}
+.passbox{margin:35px auto 0;max-width:240px}.dots{display:flex;justify-content:center;gap:13px;margin-bottom:17px}.dot{height:9px;width:9px;border:1px solid white;border-radius:50%}.dot.filled{background:white}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:240px;margin:auto}.key{border:0;border-radius:50%;aspect-ratio:1;background:#ffffff24;color:white;font-size:24px;cursor:pointer;backdrop-filter:blur(8px)}.key small{display:block;font-size:8px;letter-spacing:1px}.lockhint{font-size:11px;color:#f9dbe8;margin-top:18px}.swipe{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);height:4px;width:105px;background:#fff;border-radius:5px}
+.home{padding:62px 19px 35px;background:linear-gradient(160deg,#554353aa,#212735cc 60%,#17151c),radial-gradient(circle at 20% 20%,#b47d9a,#1d2534);background-blend-mode:screen,normal}
+.welcome{font-size:13px;color:#f8dce8;margin:0 0 4px}.home h1{font-size:27px;margin:0 0 20px;font-weight:650}.widget{border:1px solid #ffffff22;background:#ffffff17;border-radius:20px;padding:14px 16px;margin-bottom:23px;backdrop-filter:blur(12px)}.widgettop{display:flex;justify-content:space-between;color:#f5d9e6;font-size:12px}.widget strong{display:block;font-size:24px;margin-top:5px}.widget p{margin:2px 0 0;font-size:12px;color:#f5d9e6}
+.appgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 10px}.appicon{border:0;background:none;color:white;padding:0;cursor:pointer;text-align:center;font-size:10px}.appicon .emoji{display:flex;width:54px;height:54px;margin:0 auto 6px;border-radius:16px;align-items:center;justify-content:center;font-size:27px;box-shadow:0 5px 12px #0003;background:linear-gradient(145deg,#f7d0df,#b783a0)}.appicon:nth-child(2) .emoji{background:linear-gradient(145deg,#b8f1d2,#2ca77a)}.appicon:nth-child(3) .emoji{background:linear-gradient(145deg,#ffcbce,#bd4b86)}.appicon:nth-child(4) .emoji{background:linear-gradient(145deg,#fff,#d7d9e7)}.appicon:nth-child(5) .emoji{background:linear-gradient(145deg,#a9d9ff,#3972b9)}.appicon:nth-child(6) .emoji{background:linear-gradient(145deg,#c3edff,#5d9dcb)}.appicon:nth-child(7) .emoji{background:linear-gradient(145deg,#fff,#a5a5af)}.appicon:nth-child(8) .emoji{background:linear-gradient(145deg,#333,#050505)}.appicon:nth-child(9) .emoji{background:linear-gradient(145deg,#9fe6bd,#198f69)}.appicon:nth-child(10) .emoji{background:linear-gradient(145deg,#d9d9e2,#797b8e)}
+.dock{position:absolute;bottom:22px;left:17px;right:17px;border:1px solid #ffffff22;background:#ffffff20;border-radius:23px;padding:10px;display:flex;justify-content:space-around;backdrop-filter:blur(18px)}
+.dock button{font-size:24px;width:49px;height:49px;border:0;border-radius:15px;background:#ffffff2b;cursor:pointer}
+.appview{background:#f7f4f7;color:#29232d;padding-top:38px}.appbar{height:52px;display:flex;align-items:center;padding:0 16px;gap:12px;border-bottom:1px solid #e6dfe7;background:#fff9;position:relative;z-index:2}.back{border:0;background:none;color:#b44f7b;font-size:16px;cursor:pointer}.appbar h2{font-size:17px;margin:0;flex:1}.appcontent{height:calc(100% - 90px);overflow:auto;padding:14px}.contact{display:flex;align-items:center;gap:12px;padding:12px 5px;border-bottom:1px solid #e8e0e8;cursor:pointer}.avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f6c5d8,#aa8fb5);font-size:21px;flex-shrink:0}.contact strong{font-size:14px;display:block}.contact small{display:block;color:#8c818e;margin-top:4px;font-size:12px}.heart{margin-left:auto;color:#df6b9a}.chathead{display:flex;align-items:center;gap:10px;padding:0 14px 12px;background:#fff}.chatmessages{padding:16px 12px;display:flex;flex-direction:column;gap:9px;min-height:300px}.bubble{max-width:82%;padding:10px 13px;border-radius:17px;font-size:13px;line-height:1.4;box-shadow:0 1px 2px #0000}.bubble.them{align-self:flex-start;background:#fff;border-bottom-left-radius:5px}.bubble.me{align-self:flex-end;background:#f7c5d8;border-bottom-right-radius:5px}.time{font-size:9px;color:#918492;margin-top:4px;text-align:right}.sendrow{position:absolute;bottom:0;left:0;right:0;background:#fff;padding:10px;display:flex;gap:8px;border-top:1px solid #e5dce5}.sendrow input{min-width:0;flex:1;border:1px solid #ddd1dd;border-radius:20px;padding:10px 13px;font-size:13px;outline:none}.sendrow button{border:0;border-radius:50%;width:40px;background:#d96f9b;color:white;font-size:17px;cursor:pointer}
+.note{background:#fff7c8;border-radius:14px;padding:15px;line-height:1.5;min-height:180px;box-shadow:0 3px 10px #0001}.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.photo{height:130px;border-radius:13px;background:linear-gradient(135deg,#eab6c9,#655d82);display:flex;align-items:center;justify-content:center;font-size:34px}.photo:nth-child(2){background:linear-gradient(135deg,#f4d5aa,#c17e91)}.photo:nth-child(3){background:linear-gradient(135deg,#a8cbd5,#627b98)}.photo:nth-child(4){background:linear-gradient(135deg,#e5c2e9,#9d7da7)}
+.simplecard{background:white;border-radius:14px;padding:15px;margin-bottom:10px}.simplecard p{font-size:13px;line-height:1.5;color:#625764}.settingrow{padding:15px;background:white;border-bottom:1px solid #eee4ee;font-size:14px}
+.toast{position:absolute;top:50px;left:50%;transform:translateX(-50%);background:#201c27;color:white;padding:10px 15px;border-radius:18px;font-size:12px;display:none;z-index:20;white-space:nowrap}.toast.show{display:block}
+@media(max-height:700px){.home{padding-top:52px}.widget{padding:10px 14px;margin-bottom:16px}.appgrid{gap:14px 8px}.appicon .emoji{width:47px;height:47px}.clock{font-size:66px}}
+</style>
+</head>
+<body>
+<div class="phone"><div class="screen">
+<div class="dynamic"></div><div class="status"><span id="statusTime">9:41</span><span>●●● ▰</span></div>
+<div class="toast" id="toast"></div>
+<section class="lock active" id="lock">
+<div class="date" id="lockDate">Rabu, 21 Oktober</div><div class="clock" id="lockClock">9:41</div><div class="subtitle">a little world, just for you ♡</div>
+<div class="passbox"><div class="dots" id="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+<div class="keypad">
+<button class="key" data-key="1">1<small>&nbsp;</small></button><button class="key" data-key="2">2<small>ABC</small></button><button class="key" data-key="3">3<small>DEF</small></button>
+<button class="key" data-key="4">4<small>GHI</small></button><button class="key" data-key="5">5<small>JKL</small></button><button class="key" data-key="6">6<small>MNO</small></button>
+<button class="key" data-key="7">7<small>PQRS</small></button><button class="key" data-key="8">8<small>TUV</small></button><button class="key" data-key="9">9<small>WXYZ</small></button>
+<button class="key" data-key="clear" style="font-size:12px;background:transparent">hapus</button><button class="key" data-key="0">0<small>&nbsp;</small></button><button class="key" data-key="enter" style="font-size:12px;background:transparent">buka</button>
+</div><div class="lockhint">Password demo: <b>1234</b></div></div><div class="swipe"></div>
+</section>
+<section class="home" id="home">
+<p class="welcome">Rabu, 21 Oktober</p><h1>Good evening ♡</h1>
+<div class="widget"><div class="widgettop"><span>MY LITTLE WORLD</span><span>✦  ✧  ✦</span></div><strong>made with love</strong><p>your story lives here.</p></div>
+<div class="appgrid">
+<button class="appicon" data-app="kakao"><span class="emoji">💬</span>KakaoTalk</button>
+<button class="appicon" data-app="whatsapp"><span class="emoji">📞</span>WhatsApp</button>
+<button class="appicon" data-app="instagram"><span class="emoji">📸</span>Instagram</button>
+<button class="appicon" data-app="notes"><span class="emoji">📝</span>Notes</button>
+<button class="appicon" data-app="weather"><span class="emoji">🌤️</span>Weather</button>
+<button class="appicon" data-app="photos"><span class="emoji">🌄</span>Photos</button>
+<button class="appicon" data-app="maps"><span class="emoji">🗺️</span>Maps</button>
+<button class="appicon" data-app="camera"><span class="emoji">📷</span>Camera</button>
+<button class="appicon" data-app="x"><span class="emoji">𝕏</span>X</button>
+<button class="appicon" data-app="settings"><span class="emoji">⚙️</span>Settings</button>
+</div>
+<div class="dock"><button data-app="kakao" aria-label="KakaoTalk">💬</button><button data-app="whatsapp" aria-label="WhatsApp">📞</button><button data-app="photos" aria-label="Photos">🌄</button><button data-app="camera" aria-label="Camera">📷</button></div>
+<div class="swipe"></div>
+</section>
+<section class="appview" id="appview"><div class="appbar"><button class="back" id="back">‹ Kembali</button><h2 id="appTitle">KakaoTalk</h2></div><div class="appcontent" id="appcontent"></div><div class="swipe" style="background:#28212d"></div></section>
+</div></div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let pin='', currentApp='kakao', currentContact=null;
+const contacts=[
+ {id:'jae',name:'Jae ♡',emoji:'🐻',preview:'udah makan belum?',heart:true,messages:[['them','kamu udah makan belum?'],['me','belumm, kamu?'],['them','aku juga belum. makan bareng yuk besok'],['me','MAUUU 🥹'],['them','good. jangan tidur kemaleman ya, sayang.']]},
+ {id:'min',name:'Minho',emoji:'🐰',preview:'wkwkwk serius??',heart:false,messages:[['them','WKWKWK serius kamu tadi ngomong gitu?'],['me','JANGAN DIUNGKIT 😭'],['them','telat, udah aku inget selamanya']]},
+ {id:'yuna',name:'Yuna',emoji:'🐱',preview:'spill semuanya sekarang',heart:false,messages:[['them','BESTIEEE'],['them','spill semuanya sekarang'],['me','OKAY JADI GINI CERITANYA...']]},
+ {id:'eun',name:'Eunwoo',emoji:'🦊',preview:'jangan lupa istirahat',heart:false,messages:[['them','hari ini capek ya?'],['me','lumayan sih'],['them','istirahat yang cukup ya. you did well today ♡']]},
+ {id:'group',name:'our little chaos',emoji:'🧸',preview:'Yuna: GAS MALAM INI',heart:true,messages:[['them','Yuna: GAS MALAM INI'],['them','Minho: aku ikut asal ada makanan'],['me','kalian tuh ya 😭'],['them','Jae: aku jemput kamu ya?']]},
+ {id:'soo',name:'Soojin',emoji:'🐣',preview:'foto kemarin lucu banget',heart:false,messages:[['them','foto kemarin lucu banget pliss'],['me','kirim ke aku dongg'],['them','otw kirim!! 💗']]}
+];
+function showToast(t){let el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
+function updateClock(){let d=new Date();let t=d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',hour12:false});$('#statusTime').textContent=t;$('#lockClock').textContent=t;$('#lockDate').textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long'});}
+updateClock();setInterval(updateClock,30000);
+function unlock(){if(pin==='1234'){$('#lock').classList.remove('active');$('#home').classList.add('active');pin='';renderDots()}else{showToast('Password salah, coba 1234 ya ♡');pin='';renderDots()}}
+function renderDots(){$$('#dots .dot').forEach((d,i)=>d.classList.toggle('filled',i<pin.length))}
+$$('.key').forEach(k=>k.addEventListener('click',()=>{let v=k.dataset.key;if(v==='clear')pin=pin.slice(0,-1);else if(v==='enter'){unlock();return}else if(pin.length<4)pin+=v;renderDots();if(pin.length===4)setTimeout(unlock,250)}));
+function openApp(app){currentApp=app;$('#home').classList.remove('active');$('#appview').classList.add('active');renderApp(app)}
+function goHome(){$('#appview').classList.remove('active');$('#home').classList.add('active');currentContact=null}
+$$('[data-app]').forEach(b=>b.addEventListener('click',()=>openApp(b.dataset.app)));
+$('#back').addEventListener('click',()=>{if(currentContact){currentContact=null;renderApp(currentApp)}else goHome()});
+function renderApp(app){
+ let titleMap={kakao:'KakaoTalk',whatsapp:'WhatsApp',instagram:'Instagram',notes:'Notes',weather:'Weather',photos:'Photos',maps:'Maps',camera:'Camera',x:'X',settings:'Settings'};
+ $('#appTitle').textContent=titleMap[app]||app;
+ let c=$('#appcontent');c.innerHTML='';
+ if(app==='kakao'||app==='whatsapp'){
+   if(currentContact){renderChat(currentContact);return}
+   contacts.forEach(p=>{let el=document.createElement('div');el.className='contact';el.innerHTML=`<div class="avatar">${p.emoji}</div><div style="min-width:0;flex:1"><strong>${p.name}</strong><small>${p.preview}</small></div>${p.heart?'<span class="heart">♥</span>':''}`;el.onclick=()=>{currentContact=p;renderChat(p)};c.appendChild(el)});
+ }else if(app==='notes'){c.innerHTML='<div class="note" contenteditable="true"><b>dear diary ♡</b><br><br>hari ini aku mau bikin banyak kenangan baru.<br><br>— edit tulisan ini sesuka kamu ya! ✨</div><p style="font-size:11px;color:#8b7f8e">Ketuk catatan untuk mengedit teks.</p>'}
+ else if(app==='photos'){c.innerHTML='<div class="photo-grid"><div class="photo">🌷</div><div class="photo">🌅</div><div class="photo">🌊</div><div class="photo">🧸</div></div><p style="font-size:12px;color:#857989">little memories ♡ · foto demo</p>'}
+ else if(app==='weather'){c.innerHTML='<div class="simplecard" style="text-align:center;padding:28px"><div style="font-size:54px">🌤️</div><h1 style="font-size:42px;margin:8px">27°</h1><p>Mostly cloudy</p><b>Depok, Indonesia</b><p>cuaca demo untuk cerita AU kamu</p></div>'}
+ else if(app==='instagram'){c.innerHTML='<div class="simplecard"><div class="avatar">🌸</div><b>your.au.diary</b><div class="photo" style="height:230px;margin-top:12px">🌷</div><p>somewhere between reality and our little story ♡</p><b>♡ 1.204 likes</b></div><div class="simplecard"><b>jae.zip</b><p>today was a good day.</p>♡ 982 likes</div>'}
+ else if(app==='maps'){c.innerHTML='<div class="simplecard" style="text-align:center;padding:35px"><div style="font-size:64px">🗺️</div><h3>Our little places</h3><p>☕ café tempat first date<br><br>🌳 taman tempat ngobrol<br><br>🌊 pantai buat kabur sebentar</p></div>'}
+ else if(app==='camera'){c.innerHTML='<div style="height:390px;border-radius:18px;background:linear-gradient(145deg,#51435a,#202a3a);display:flex;align-items:center;justify-content:center;flex-direction:column;color:white"><div style="font-size:60px">📷</div><p>Camera demo</p><button id="snap" style="border:3px solid white;background:#fff5;border-radius:50%;width:60px;height:60px;cursor:pointer"></button></div>';$('#snap').onclick=()=>showToast('📸 captured! (demo)')}
+ else if(app==='settings'){c.innerHTML='<div class="settingrow">✈️ Airplane Mode <span style="float:right">○</span></div><div class="settingrow">📶 Wi-Fi <span style="float:right">Connected</span></div><div class="settingrow">🔵 Bluetooth <span style="float:right">On</span></div><div class="settingrow">🌙 Focus</div><div class="simplecard" style="margin-top:15px"><b>My AU Phone</b><p>Made with love ♡<br>Versi demo 1.0</p></div>'}
+ else if(app==='x'){c.innerHTML='<div class="simplecard"><b>yuna ♡</b><p>aku punya teori kalau dia suka sama seseorang...</p><small>♡ 2.1K　↻ 304</small></div><div class="simplecard"><b>minho</b><p>some people make ordinary days feel special.</p><small>♡ 890　↻ 102</small></div>'}
+}
+function renderChat(p){
+ const c=$('#appcontent');c.innerHTML='';
+ let head=document.createElement('div');head.className='chathead';head.innerHTML=`<div class="avatar">${p.emoji}</div><div><strong>${p.name}</strong><div style="font-size:11px;color:#8d7f8d">online now ♡</div></div>`;c.appendChild(head);
+ let msgs=document.createElement('div');msgs.className='chatmessages';msgs.id='chatmessages';
+ p.messages.forEach(m=>addBubble(msgs,m[0],m[1]));c.appendChild(msgs);
+ let row=document.createElement('div');row.className='sendrow';row.innerHTML='<input id="messageInput" placeholder="Message..."><button id="sendMessage">➤</button>';c.appendChild(row);
+ const send=()=>{let input=$('#messageInput'),v=input.value.trim();if(!v)return;p.messages.push(['me',v]);addBubble(msgs,'me',v);input.value='';msgs.scrollTop=msgs.scrollHeight};
+ $('#sendMessage').onclick=send;$('#messageInput').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
+}
+function addBubble(container,who,text){let b=document.createElement('div');b.className='bubble '+(who==='me'?'me':'them');let safe=document.createElement('span');safe.textContent=text;b.appendChild(safe);let time=document.createElement('div');time.className='time';time.textContent='now';b.appendChild(time);container.appendChild(b)}
+</script>
+</body></html>
